@@ -11,13 +11,13 @@ abstract class RequestInputHandler extends UpdateHandler
 {
     protected static function getState(TeleBot $bot)
     {
-        $statePath = __DIR__ . "/../../storage/" . $bot->config('token') . ".json";
+        $statePath = storage_path()."/" . $bot->config('name') . ".json";
         return file_exists($statePath) ? json_decode(file_get_contents($statePath), true) : [];
     }
 
     protected static function updateState(TeleBot $bot, callable $callback)
     {
-        $statePath = __DIR__ . "/../../storage/" . $bot->config('token') . ".json";
+        $statePath = storage_path()."/" . $bot->config('name') . ".json";
         $state = static::getState($bot);
 
         $state = $callback($state);
